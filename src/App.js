@@ -41,8 +41,17 @@ const App = () => {
     setTable("");
   };
 
+  const deleteItem = (tablekey, index) => {
+    setOrders((prevState) => {
+      const updatedTable = [...prevState[tablekey]];
+      updatedTable.splice(index, 1);
+      return { ...prevState, [tablekey]: updatedTable };
+    });
+    console.log("DELETED -", tablekey, index);
+  };
   return (
     <React.Fragment>
+      <h1>Order your Food : </h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="orderId">Uniquie order id : </label>
         <input
@@ -54,6 +63,8 @@ const App = () => {
             setOrderId(e.target.value);
           }}
         />
+        <br />
+        <br />
         <label htmlFor="price"> Price : </label>
         <input
           type="number"
@@ -64,6 +75,8 @@ const App = () => {
             setPrice(e.target.value);
           }}
         />
+        <br />
+        <br />
         <label htmlFor="dish"> Dish : </label>
         <input
           type="text"
@@ -74,6 +87,8 @@ const App = () => {
             setDish(e.target.value);
           }}
         />
+        <br />
+        <br />
         <label htmlFor="table"> Choose a table : </label>
         <select
           id="table"
@@ -87,13 +102,30 @@ const App = () => {
           <option value="table2">Table 2</option>
           <option value="table3">Table 3</option>
         </select>
+        <br />
+        <br />
         <button type="submit"> Add to Bill</button>
       </form>
       <div>
         <h1>Orders : </h1>
-        <Table1 od={orders.table1} />
-        <Table2 od={orders.table2} />
-        <Table3 od={orders.table3} />
+        <Table1
+          od={orders.table1}
+          deleteItem={(index) => {
+            deleteItem("table1", index);
+          }}
+        />
+        <Table2
+          od={orders.table2}
+          deleteItem={(index) => {
+            deleteItem("table2", index);
+          }}
+        />
+        <Table3
+          od={orders.table3}
+          deleteItem={(index) => {
+            deleteItem("table3", index);
+          }}
+        />
       </div>
     </React.Fragment>
   );

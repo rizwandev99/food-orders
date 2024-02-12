@@ -1,5 +1,7 @@
 const Table2 = (props) => {
-  //   console.log("Table 1", props.od);
+  const deleteHandler = (index) => {
+    props.deleteItem(index);
+  };
   return (
     <>
       <h2>Table 2:</h2>
@@ -8,6 +10,14 @@ const Table2 = (props) => {
           return (
             <li key={index}>
               {items.id} -- {items.price} -- {items.dish}
+              <button
+                type="button"
+                onClick={() => {
+                  deleteHandler(index);
+                }}
+              >
+                Delete
+              </button>
             </li>
           );
         })}
