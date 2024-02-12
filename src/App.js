@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table1 from "./components/Table1";
 import Table2 from "./components/Table2";
 import Table3 from "./components/Table3";
@@ -14,6 +14,18 @@ const App = () => {
   const [dish, setDish] = useState("");
   const [table, setTable] = useState("");
   const [orders, setOrders] = useState(orders_obj);
+
+  useEffect(() => {
+    const storedOrders = localStorage.getItem("orders");
+    console.log("Initial", storedOrders);
+    if (storedOrders) {
+      setOrders(JSON.parse(storedOrders));
+    }
+  }, []);
+  useEffect(() => {
+    console.log("Hii");
+    localStorage.setItem("orders", JSON.stringify(orders));
+  }, [orders]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
