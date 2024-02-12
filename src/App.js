@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+const App = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.elements);
+    console.log("Selected table: ", event.target.elements.table.value);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <h1>Hello world!!</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="orderId">Uniquie order id : </label>
+        <input type="number" id="orderId" name="orderId" />
+        <label htmlFor="price"> Price : </label>
+        <input type="number" id="price" name="price" />
+        <label htmlFor="dish"> Dish : </label>
+        <input type="text" id="dish" name="dish" />
+        <label htmlFor="table"> Choose a table : </label>
+        <select id="table" name="table">
+          <option value="table1">Table 1</option>
+          <option value="table2">Table 2</option>
+          <option value="table3">Table 3</option>
+        </select>
+        <button type="submit"> Add to Bill</button>
+      </form>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
